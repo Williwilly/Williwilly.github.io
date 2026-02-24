@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precious Williams — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f4f7fb;
+    --surface2: #eaf0f8;
+    --border: #dce6f0;
+    --accent: #1a6fd4;
+    --accent2: #0f52a8;
+    --accent3: #3b8fe8;
+    --text: #0d1b2e;
+    --muted: #6b859e;
+    --card-bg: #f8fafd;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY - removed for light theme */
+  body::before {
+    display: none;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(26,111,212,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,111,212,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,212,0.07) 0%, transparent 70%);
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,143,232,0.06) 0%, transparent 70%);
+    left: -80px;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(26,111,212,0.3);
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-family: 'Lora', serif;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.8;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border: 1px solid;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--muted);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* HERO VISUAL — CHART */
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.2s 0.4s ease both;
+  }
+
+  .hero-chart {
+    width: 100%;
+    max-width: 440px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .chart-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .chart-header span { color: var(--accent); }
+
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 140px;
+    margin-bottom: 0.8rem;
+  }
+
+  .bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .bar {
+    width: 100%;
+    border-radius: 2px 2px 0 0;
+    animation: barGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: bottom;
+  }
+
+  .bar-a { background: var(--accent); opacity: 0.9; }
+  .bar-b { background: #b8d4f0; opacity: 1; }
+
+  .bar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+
+  .metric {
+    padding: 0.5rem;
+  }
+
+  .metric-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 1.5rem 0 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: #4a5568;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong { color: var(--text); font-style: normal; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .about-stat {
+    background: var(--surface);
+    padding: 1.8rem;
+    transition: background 0.2s;
+  }
+
+  .about-stat:hover { background: #eef4fb; }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; }
+
+  #skills > .inner { max-width: 1200px; margin: 0 auto; padding: 6rem 4rem; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .skill-card {
+    background: var(--card-bg);
+    padding: 2rem 1.5rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .skill-card:hover { background: #eef4fb; }
+
+  .skill-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    position: relative;
+    transition: background 0.2s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover { background: #eef4fb; }
+
+  .project-card.accent2::before { background: var(--accent2); }
+  .project-card.accent3::before { background: var(--accent3); }
+
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .project-card.accent2 .project-type { color: var(--accent2); }
+  .project-card.accent3 .project-type { color: var(--accent3); }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    color: #4a5568;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-impact {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .impact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .impact-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+
+  .project-card.accent2 .impact-text { color: var(--accent2); }
+  .project-card.accent3 .impact-text { color: var(--accent3); }
+
+  .project-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-tool {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--surface2);
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+  }
+
+  .project-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.8rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 4rem;
+    color: rgba(26,111,212,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* EXPERIENCE */
+  .experience-list {
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .exp-item:hover { background: transparent; }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .exp-desc {
+    color: #4a5568;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .exp-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .highlight {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid rgba(26,111,212,0.2);
+    color: rgba(26,111,212,0.8);
+    text-transform: uppercase;
+  }
+
+  /* CONTACT / FOOTER */
+  .footer-section {
+    max-width: 100%;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 6rem 4rem;
+    text-align: center;
+  }
+
+  .footer-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-section h2 em {
+    font-style: italic;
+    font-family: 'Lora', serif;
+    color: var(--accent);
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-link:hover { color: var(--accent); }
+
+  .footer-copy {
+    margin-top: 4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: #aab8c8;
+    letter-spacing: 0.1em;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes barGrow {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; }
+    .hero-right { display: none; }
+    section { padding: 4rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    #skills > .inner { padding: 4rem 2rem; }
+    .footer-section { padding: 4rem 2rem; }
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+    background: var(--surface);
+  }
+
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 30s linear infinite;
+    gap: 3rem;
+  }
+
+  .marquee-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .marquee-item span { color: var(--accent); margin-right: 1.5rem; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Precious Williams</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag">Data Analyst · MTN Nigeria & MoMo PSB</div>
+    <h1>Turning<br>data into<br><em>stories</em><br>that drive<br>decisions</h1>
+    <p class="hero-sub">
+      I help product-led fintech and SaaS teams cut through the noise — turning messy product data into clear insights on where users drop off, what drives retention, and how changes actually move the needle.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <a href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDggMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyA4IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKNyAwIG9iago8PAovQXV0aG9yIChcKGFub255bW91c1wpKSAvQ3JlYXRpb25EYXRlIChEOjIwMjYwMjI0MTYwNzUxKzAwJzAwJykgL0NyZWF0b3IgKFwodW5zcGVjaWZpZWRcKSkgL0tleXdvcmRzICgpIC9Nb2REYXRlIChEOjIwMjYwMjI0MTYwNzUxKzAwJzAwJykgL1Byb2R1Y2VyIChSZXBvcnRMYWIgUERGIExpYnJhcnkgLSBcKG9wZW5zb3VyY2VcKSkgCiAgL1N1YmplY3QgKFwodW5zcGVjaWZpZWRcKSkgL1RpdGxlIChcKGFub255bW91c1wpKSAvVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyA1IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKOSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAzMjQ3Cj4+CnN0cmVhbQpHYiEjXj8kRyFuJnEvKjBXMF8lYyU4bGFMMGkqXV46PXE5WjJMJS1sYSJORWNUWjw0YVckUWVYWlRpbz5dOSpYMmA6QChxXT5sOyghTkdyc0ZrKlR1LHFMYj9hJjtxLSQsR2Q+NStQbmNmZT9dXmpWZmFGMDQ2Sl5vQmhPRl4hY1FeNVAuVmNLJFo7OWY1XjpEcjdFXGRaUSJMKVI5Z2BhcGNDPSdYcHMoVCU1KT9wXS9WSz1FIUk+YFkyJGslam5eQGJSbURPS0ZaWS8oJG5qNWZeIVluKDlSaGleP2ZmU2JwaUMtQ15vSGpAUjklcUteaTE9P21eY2VaTm9eRGhaMGEsPl0zQlVVMVFpRjhWJ09vUio6QFctSjo4WV5UJFJuI1dGM25MJVsvYzAobDtDQEpcI0VVbzUnVz4zMlRnXF1PJigtZjEhMXJdJCVFM2NnUUpFbGR0JVNbMTA8LSo2Oj5WWmAsV2NPPGtcYFw3QTckMHFwcnNaOGNHQSZUZ0p1XSQ6akEwPnViNiQiOihObk8tYVZfMDAmaC9JLVtMIzI6a1xySD9FNUhUR2Y9XV5RUy01RiQjNC9EIlRGVGpuNGpLcEU9ZixAOiQ6VU0iWj5xK1ttPzhBSSMlVU1HL3NeNS0zPEY5PG5oRDolcHJtNSFcPFJlbkdAVUpeTEJUKy1hIjROI3RBKTNkJTVeKWFeKStETUBbbFdSP0k1TW1lUEZSJjJQKUsoKUthZiNKbnIjT0xPRzlEalZraFUpXEtTRWNqQUpOM0ZNYiI3JVNIRE85LGcmP3MxXE8oNGZGLj1BUUVTKychI25OYyFJT3E/TyM9b2k5ZDohak9lalU3NjwqKXU+ViIsay5XQDhiO2piYW49SU88aEdTPzUuRDBLNXNyJVZRRE5dZ2YzSkhSTksjJzc0YDNGOTFUOFdLdGZANmVhK2YvWENxX209XiMtJkZCMCJDUEQxJSlvIzVkMic4VCM1YSJLLGFFJ0xKbj5ORVVBMT44JyZWI0xbLUQ9ZyNdPkArVGdVP1AvQi0uJCdzN2NnJEklWnRlXzU+OzM8bSgxPSEpLUtCKEJbYl8mRylSXDkmal1aJ2FWbDVlQTZeYSgzMztHLlBTTSNwVlo1bVk3NDNAN01BaF1HMzJqZHJgJjg5Z3QybCQ7RiFWIm84QFFpW0k5WTs9RzlZVmtfYDhLPiRKbzV0OkxNRD9lSiYpTj4hTl8uQSpVQkwnREptaSdKZWsoW1UkZWkyLiJnKG1cX2JbJmxpJ2RzYCM/ZitiZjNeYkd0LjpaTk9MMEVSVmNUKnRxWlwiakEyLChlSXBvUFN1RS1GKSJPLWgpZ0doQTVHTVtnMFYhVChMU2w5PHQvTjM2ZksvWWZDPmVnWG1lI0RVcSolZi5eImlzUFdbNyokYFZSbnVSIl07TjI1VFRZOzFnRnNaK0M3VlxBbGFgbzZlMVJjbU1FT0ZWOi91YGYtbW5BVS1Oay8uXz5PNGZNbF1yVENSZWg8NzRMYDxXMWlJKDNlXSF0ZFdKPzRWZDJRT1NEO1IuTzY3P0dyQXNCa1hBVDBFQlJycVRxPD8iTlhaRD1hY1xvS1hPbHMudDlMUUteV0lmZlZeaDoqby05bygqN1FPa2M3cXNdTmVGQ2Y2cS1ZcnE/PSE4ZFU6dVdtMmFhQ2xfOi0/ZktwTF00LC1jSS4/WExSOUVqJjBkZGI0SV8zXUY6ZEY2aV1db2tnW1oqSzFvP1tlWFRfXE0mSzI1RFkkdVFzP1BMbCh0dD02b0pHQltZS0JMXldbUGkyc2ZsJyMtXShnY1cqXF1AP2tHST1mPlcmRV8yaE5UNi5mMkZnSkFTQ19fbkFOXXF0QUFnNUE3MkEmUiovODdfQWIsTTIsPUhVIlNDP21gLi1wYitvcU0oMlo2SW5LJlMoaytwVlhXVFBKVjxRcFldVz1aT0FJJScjPT4hUyNFOSdaWlpAPGsxSlk2ZDVYU3BcWmdrJT5QMUNtKGBOa04tZjAhIU4kT01VKkNdZ2o5PGJwcVZhc1tpbyhERzxLQkhSLjUqV2VyKlZLSDtcRiVzRGxGOEonZylmZGRFO09JbDJVcmtwVFFOJUZvXHM9SGBeNGNXJkYtMCs2ajxSci1Hcz4jaUE0Xj5ZZ21OdXA/Pj1XMjlUY25sW3JxU2YsZzAsL1M0X18jcGtaaDRFW2xeSjgwXypjZmo4VFtCL0gwOztMMXVfYkolSzw1aT5lYktiWERHNCUwYVw4Z0BoTzFwSm1FPklYNzkrRiY4QUw4TylgJD9XUEc4Z0wyRihxKytTK1hMZy8xOFxUYlU2WGNEM1orbU9OXkZnMlNoMzgmaTBkNDVlXG5DL1cvTmNiXz5nSFVcMU8mLTE1OGNhMzdlVU0hdTFkLWBQUiVXQFdBRylNcDtqb1E9PzJkRzAjLShqPmtJX1UlL2ssOjN1WGZAYjolM05KcD4ocCYtWEpiSnM8UjpAXVVMMT5YUGk/X01sPmYjV2VgcG5DO1hXaSRiZS9zQjMwPGZGJGIjU2pcZWpZX2BXLDVSaVRrTCw/Z0FjZUA+ViZwYGIyWUsvKDZrTDotMWhnRlVYLUFOV0VlLSk3VUFUaDU3WEJlJkRgI1IuZ2VxTFkmVy5RRTg3UClOL1AmaT4hY2xYMmFUbWwpPGhTLkhXMSdTPzNeaEhuM1U4WTFaUisxakVkODtMWkBVPVxFNCZmUCNZdHAkWUxZdU1HKFsiVHA3U0wzZycvbzFnRWBgRCJpN1E1THNsY0BfJ3F0RTItN283SWIjVi8hO1NwbT5hN21gRVxwamdlIVhnTmtFRDFrW0JDLmVrUT9oPz4vaT9mPlRqVWk2U2JSLlprYU5OVzE1TEo0YTMpJUNSSjlTQ0xhaVBsNjg8aUExQGJtayI4Ql9qajhnRCo0TD5uRS5NViRQXzEwUXMwXSNPK0pGJy0tUy9LPThXI0s/bF4zdG87VSFsPj4tMGZOMyc9I21AOFIoKS1sJ2xkXj9PdXRAZFlgXFNmdVxFamQpRlpOKksxP1Q5OD5ETy49aFZSL2UhTWVSZHNVIi9rL3U0YkJlL15cVzJEYiYhRGldb2ZWV28lbDowbi5rNF0rNTcnOFNsP15KZDhRXkQrZlkyYkJQUENfTEBNaEdLS3MlY0BVImhXYUhxSE5vXV1EaSRrb0BzMU09UGE2SihVQTA0UXBzcUEkJFUxZGRAPFp1KTZSSjBKVT5UaT1iTjBxS21fPCFJclNWcFliQVBIOCMuM00oYlczKlElck1rNmskRzNKbGBvUjFFPjFIPCM2cFNQai9iR1NkQi1dUk9FJVhQP2VlQ1QxOWg3UUhuN2tKOSE2amNoXmhuVkEjWUFKY2ZjPWlRcFdtMSZwIlhnMztjW1taQjRqXGIoMFpiVjYvNlJYVSdtIyxnVFpbJDRvYkUzWzU6L281XCpMRlFtaklmXmYla1tZNV0rc1dSbT5sJWJpJnIiXG5zKklvSjNxRSVhVG5rQkdzIVdZb1ZIIz9TY0d1RExNSWFkZjIsZDkuV11JVkdCPmkoaFw1STlXbVdqMDw9TS06QEA9SE9KLnVbUlJCMi9HVm5vSik3NURDWzoicW1kaTA/WU5gQFJWOD1TU0VcbUZedEFAOVZvM2JRbFZQTnJTYnMvXGZyJCtXaXBGXS9OS1UhbCc8LjVvYXJjRVUwbiczVTxyR09aRG8kZS1kKUU6IyIpYlIzK2AkaUldPkdZKDRzI1E2PEJSI2dJVT9cXUY2JTh0WEZwVilYOEg6aEBDT2EkK1VqJilgZzRIS0JfWmFASi9iOjJWWnB1U0chSyErJjgtTHU4ZD9jLWU7KiJBTHFLTjo2NGgqLCdhRHQ5MD5rVzByPzc8ZTJeLSpeRitmbXNhIThzaDhQMzg6NVNfPXJFTFlmXGxZblA/UUIiITpOaV49NVhkM0tPZ0tnRSslQ2JeODokQFJtY1ZEdTNtZkJfJloxSVYjTW8jOWRJUk5yOWVPJV0jRDxbIzUuRW0hJUFwMXJbMmZeJyFPSCtdbjZcKzQpIVUzYlhxIVElb1N0I1hlOXFlYjglQGQ5cSZXXD0lXl5OWjUyN0M+I2ZxVTMvQCRiZTxbUi5WJ0JQSCVBc2hbXltpTmpfRlFNNVZeOm0lISducDxfclRmTEFlcmI7S1EjNzdQcE1qcSROXTBbTFpUYzszY1xHTm00RU9hMUo3NCNrJmBwRmVnY0E7SXVXWihwMTI1SFh1Y1pCP2tRJzRPLy1RU2Y+NytPKDgmNUozNEFZUDhWZHVFYyI6XCglZDduNGhVUyRQQmlFcH4+ZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTAKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMTIgMDAwMDAgbiAKMDAwMDAwMDIxOSAwMDAwMCBuIAowMDAwMDAwMzMxIDAwMDAwIG4gCjAwMDAwMDA0NDYgMDAwMDAgbiAKMDAwMDAwMDY0OSAwMDAwMCBuIAowMDAwMDAwNzE3IDAwMDAwIG4gCjAwMDAwMDA5OTcgMDAwMDAgbiAKMDAwMDAwMTA1NiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzxjMTBkZDQ0MTk5OTU4ZWZhNDQ5MGUzNmI1ZTUzNWRlMz48YzEwZGQ0NDE5OTk1OGVmYTQ0OTBlMzZiNWU1MzVkZTM+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDcgMCBSCi9Sb290IDYgMCBSCi9TaXplIDEwCj4+CnN0YXJ0eHJlZgo0Mzk0CiUlRU9GCg==" download="Precious_Williams_Resume_2025.pdf" class="btn btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:0.4rem;vertical-align:middle"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+        Download CV
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-chart">
+      <div class="chart-header">
+        <span>KYC Funnel Completion</span>
+        <span>Step-by-step drop-off</span>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-group">
+          <div class="bar bar-a" style="height:100%;animation-delay:0.1s"></div>
+          <div class="bar-label">Signup</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar bar-a" style="height:88%;animation-delay:0.2s"></div>
+          <div class="bar-label">Email</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar bar-a" style="height:74%;animation-delay:0.3s"></div>
+          <div class="bar-label">Phone</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar bar-a" style="height:55%;animation-delay:0.4s"></div>
+          <div class="bar-label">ID</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar bar-b" style="height:38%;animation-delay:0.5s"></div>
+          <div class="bar-label">Selfie</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar bar-b" style="height:30%;animation-delay:0.6s"></div>
+          <div class="bar-label">Address</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar bar-b" style="height:24%;animation-delay:0.7s"></div>
+          <div class="bar-label">Approved</div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>High completion</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1e6fd4"></div>Critical drop-off zone</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-val">76%</div><div class="metric-label">Drop-off at ID</div></div>
+        <div class="metric"><div class="metric-val">7</div><div class="metric-label">Funnel steps</div></div>
+        <div class="metric"><div class="metric-val">SQL</div><div class="metric-label">Core tool</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>✦</span> SQL</div>
+    <div class="marquee-item"><span>✦</span> Power BI</div>
+    <div class="marquee-item"><span>✦</span> Excel</div>
+    <div class="marquee-item"><span>✦</span> Google Analytics</div>
+    <div class="marquee-item"><span>✦</span> Python</div>
+    <div class="marquee-item"><span>✦</span> Funnel Analysis</div>
+    <div class="marquee-item"><span>✦</span> Cohort Analysis</div>
+    <div class="marquee-item"><span>✦</span> KYC Analytics</div>
+    <div class="marquee-item"><span>✦</span> A/B Testing</div>
+    <div class="marquee-item"><span>✦</span> Data Storytelling</div>
+    <div class="marquee-item"><span>✦</span> Segmentation</div>
+    <div class="marquee-item"><span>✦</span> WordPress</div>
+    <!-- duplicate -->
+    <div class="marquee-item"><span>✦</span> SQL</div>
+    <div class="marquee-item"><span>✦</span> Power BI</div>
+    <div class="marquee-item"><span>✦</span> Excel</div>
+    <div class="marquee-item"><span>✦</span> Google Analytics</div>
+    <div class="marquee-item"><span>✦</span> Python</div>
+    <div class="marquee-item"><span>✦</span> Funnel Analysis</div>
+    <div class="marquee-item"><span>✦</span> Cohort Analysis</div>
+    <div class="marquee-item"><span>✦</span> KYC Analytics</div>
+    <div class="marquee-item"><span>✦</span> A/B Testing</div>
+    <div class="marquee-item"><span>✦</span> Data Storytelling</div>
+    <div class="marquee-item"><span>✦</span> Segmentation</div>
+    <div class="marquee-item"><span>✦</span> WordPress</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">01 — About me</div>
+    <h2 class="section-title">I chase the<br><em>aha</em> moment</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm <strong>Precious Williams</strong> — a Data Analyst based in Lagos, specialising in customer & transaction data for digital platforms across telecommunications, banking, and fintech.
+      </p>
+      <p>
+        I work on questions like: <em>where are users dropping off and why?</em> What drives retention? Which segments behave differently? How do campaigns actually move the needle? My edge is combining rigorous analysis with clear storytelling — because the best insights are worthless if they don't drive action.
+      </p>
+      <p>
+        Currently at <strong>MTN Nigeria</strong>, I analyse behaviour across 50M+ subscribers and partner with <strong>MoMo PSB</strong> on digital financial inclusion insights. Previously at <strong>Guaranty Trust Bank</strong>, I built Power BI dashboards and CX frameworks that improved service quality by 20% and cut issue resolution time by 25%.
+      </p>
+      <p style="margin-bottom:0">
+        When I'm not in the data, I'm travelling, reading, cooking, or dancing — always chasing that "aha!" moment when the numbers finally click.
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="about-stat">
+        <div class="stat-num">50M+</div>
+        <div class="stat-desc">Subscribers analysed at MTN Nigeria</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-num">40%</div>
+        <div class="stat-desc">Reduction in manual reporting time</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-num">30%</div>
+        <div class="stat-desc">Improvement in average campaign ROI</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-num">3</div>
+        <div class="stat-desc">Industries: Banking · Telecoms · Fintech</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div id="skills">
+  <div class="inner">
+    <div class="reveal">
+      <div class="section-label">02 — Skills & tools</div>
+      <h2 class="section-title">What I work with</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-name">Data & Analytics</div>
+        <div class="skill-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Google Analytics</span>
+          <span class="tag">SEMrush</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Business Intelligence</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Looker</span>
+          <span class="tag">Dashboards</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">Reporting</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Analysis Methods</div>
+        <div class="skill-tags">
+          <span class="tag">Funnel Analysis</span>
+          <span class="tag">Cohort Analysis</span>
+          <span class="tag">A/B Testing</span>
+          <span class="tag">Segmentation</span>
+          <span class="tag">Retention Modeling</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="tag">WordPress</span>
+          <span class="tag">Google Workspace</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Hootsuite</span>
+          <span class="tag">HubSpot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">03 — Project case studies</div>
+    <h2 class="section-title">Selected work</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Project 1: KYC Funnel -->
+    <div class="project-card reveal">
+      <div class="project-number">01</div>
+      <div class="project-type">✦ Product analytics · Fintech · SQL</div>
+      <h3 class="project-title">KYC Funnel Analysis & Optimization</h3>
+      <p class="project-desc">
+        Analyzed user verification behavior across a 7-step KYC flow to identify critical drop-off points and improve completion rates. Built step-by-step conversion queries in SQL tracking signup → email → phone → ID → selfie → address → approved, segmented by country, device, and acquisition channel. Added time-to-verify percentile analysis (P50/P75/P90/P95) and rejection retry patterns to surface <em>why</em> users abandoned — not just where.
+      </p>
+      <div class="project-impact">
+        <div class="impact-label">Key outcome</div>
+        <div class="impact-text">↗ Identified ID upload as the highest-abandonment step (76% drop-off). Rejection timing and device type were strongest predictors — surfaced actionable fixes for the product team.</div>
+      </div>
+      <div class="project-tools">
+        <span class="project-tool">SQL</span>
+        <span class="project-tool">Funnel Analysis</span>
+        <span class="project-tool">Cohort Analysis</span>
+        <span class="project-tool">Segmentation</span>
+      </div>
+    </div>
+
+    <!-- Project 2: E-commerce Power BI -->
+    <div class="project-card accent2 reveal">
+      <div class="project-number">02</div>
+      <div class="project-type">✦ Business intelligence · E-commerce · Power BI</div>
+      <h3 class="project-title">E-commerce Product Performance Dashboard</h3>
+      <p class="project-desc">
+        Built an interactive Power BI dashboard analyzing product metrics for an online store. Covered sales performance by category and SKU, customer segmentation and purchase patterns, a full conversion funnel (views → cart → purchase → returns), inventory turnover and stockout flags, geographic sales heatmaps, and time-series trends with forecasting. Designed for self-service use by non-technical stakeholders.
+      </p>
+      <div class="project-impact">
+        <div class="impact-label">Key outcome</div>
+        <div class="impact-text">↗ Surfaced top 3 underperforming SKUs accounting for 22% of returns. Geographic heatmap revealed untapped regional demand for targeted campaign planning.</div>
+      </div>
+      <div class="project-tools">
+        <span class="project-tool">Power BI</span>
+        <span class="project-tool">SQL</span>
+        <span class="project-tool">DAX</span>
+        <span class="project-tool">Data Visualization</span>
+      </div>
+    </div>
+
+    <!-- Project 3: Pricing Model -->
+    <div class="project-card reveal">
+      <div class="project-number">03</div>
+      <div class="project-type">✦ Financial modeling · Excel · Pricing strategy</div>
+      <h3 class="project-title">Product Pricing Optimization Model</h3>
+      <p class="project-desc">
+        Built a dynamic pricing model in Excel with full scenario analysis for a product line. Included price elasticity analysis with sensitivity tables, break-even analysis by product, competitive pricing comparison matrix, what-if scenarios using data tables and Goal Seek, profitability analysis with marginal cost calculations, and interactive dashboards with slicers and pivot tables.
+      </p>
+      <div class="project-impact">
+        <div class="impact-label">Key outcome</div>
+        <div class="impact-text">↗ Model revealed a 12% price increase on two product lines was viable without demand loss — projected to add margin without volume sacrifice.</div>
+      </div>
+      <div class="project-tools">
+        <span class="project-tool">Excel</span>
+        <span class="project-tool">Pivot Tables</span>
+        <span class="project-tool">Scenario Analysis</span>
+        <span class="project-tool">Financial Modeling</span>
+      </div>
+    </div>
+
+    <!-- Project 4: Email Analytics at Dataverse -->
+    <div class="project-card accent3 reveal">
+      <div class="project-number">04</div>
+      <div class="project-type">✦ Marketing analytics · Content performance · Real work</div>
+      <h3 class="project-title">Email Newsletter Performance & A/B Testing</h3>
+      <p class="project-desc">
+        At Dataverse Africa, I owned the analytics behind the email newsletter program — tracking open rates, CTR, scroll depth, and conversion by content type. Ran systematic A/B tests on subject lines, send times, and content formats. Used Google Analytics and native platform data to build a feedback loop that connected content decisions directly to engagement outcomes.
+      </p>
+      <div class="project-impact">
+        <div class="impact-label">Key outcome</div>
+        <div class="impact-text">↗ Achieved a 38% increase in engagement and click-through rates over 12 months through content relevance optimization and A/B testing — from real work at Dataverse Africa.</div>
+      </div>
+      <div class="project-tools">
+        <span class="project-tool">Google Analytics</span>
+        <span class="project-tool">A/B Testing</span>
+        <span class="project-tool">Email Analytics</span>
+        <span class="project-tool">Content Strategy</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">04 — Work experience</div>
+    <h2 class="section-title">Where I've worked</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="experience-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-date">May 2025 — Present</div>
+      <div>
+        <div class="exp-role">Data Analyst</div>
+        <div class="exp-company">MTN Nigeria · Telecommunications</div>
+        <p class="exp-desc">
+          Analyze customer behavior across 50M+ subscribers to generate insights shaping app feature roadmaps and user experience design. Deliver executive dashboards in Power BI, reducing manual reporting time by 40% and increasing visibility of campaign KPIs. Conduct retention and churn analysis, enabling a 25% uplift in targeted engagement campaign performance. Partner with MoMo PSB to uncover transaction trends, improving digital financial inclusion campaign success rates. Quantified digital campaign effectiveness, leading to a 30% improvement in average ROI.
+        </p>
+        <div class="exp-highlights">
+          <span class="highlight">Power BI</span>
+          <span class="highlight">SQL</span>
+          <span class="highlight">Churn Analysis</span>
+          <span class="highlight">Retention Modeling</span>
+          <span class="highlight">Campaign Analytics</span>
+          <span class="highlight">Executive Dashboards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">May 2025 — Present</div>
+      <div>
+        <div class="exp-role">Data Analyst</div>
+        <div class="exp-company">MoMo PSB · Fintech</div>
+        <p class="exp-desc">
+          Uncover transaction trends and behavioral patterns within MoMo's digital payments platform to improve digital financial inclusion campaign outcomes. Work cross-functionally with the MTN data team to surface insights that drive product and growth decisions. Apply funnel and segmentation analysis to understand user journeys across the digital wallet ecosystem.
+        </p>
+        <div class="exp-highlights">
+          <span class="highlight">Transaction Analytics</span>
+          <span class="highlight">Segmentation</span>
+          <span class="highlight">Funnel Analysis</span>
+          <span class="highlight">Financial Inclusion</span>
+          <span class="highlight">Product Insights</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">Mar 2023 — Feb 2025</div>
+      <div>
+        <div class="exp-role">Total Quality Officer — Customer Experience</div>
+        <div class="exp-company">Guaranty Trust Bank · Banking</div>
+        <p class="exp-desc">
+          Developed consumer protection frameworks ensuring 100% regulatory compliance, averting potential fines. Led analysis of CX performance metrics across multiple service touchpoints, driving a 20% improvement in service quality. Integrated customer feedback into process redesigns with the BPR team, improving operational efficiency by 15%. Created interactive Power BI dashboards to monitor satisfaction and complaints, reducing issue resolution time by 25%. Trained 200+ employees on CX and compliance standards, improving NPS scores by 25%.
+        </p>
+        <div class="exp-highlights">
+          <span class="highlight">Power BI</span>
+          <span class="highlight">CX Analytics</span>
+          <span class="highlight">Process Optimization</span>
+          <span class="highlight">Stakeholder Reporting</span>
+          <span class="highlight">Regulatory Compliance</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="footer-section" id="contact">
+  <div class="reveal">
+    <div class="section-label" style="text-align:center;margin-bottom:1rem">05 — Let's talk</div>
+    <h2>Ready to turn<br>your data into <em>action</em>?</h2>
+    <p style="color:var(--muted);font-size:0.95rem;margin-top:1.5rem;font-family:'DM Mono',monospace;letter-spacing:0.05em">
+      Open to full-time remote roles, contract work, and great conversations.
+    </p>
+    <div style="margin-top:2.5rem">
+      <a href="/cdn-cgi/l/email-protection#f186989d9d98909c82949394839481839492989e8482b1969c90989ddf929e9c" class="btn btn-primary"><span class="__cf_email__" data-cfemail="e99e8085858088849a8c8b8c9b8c999b8c8a80869c9aa98e84888085c78a8684">[email&#160;protected]</span></a>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/williams-precious" target="_blank" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/Williwilly" target="_blank" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://bit.ly/preciousthecreative" target="_blank" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Creative Profile
+      </a>
+      <a href="tel:+2348136522306" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +234 813 652 2306
+      </a>
+      <a href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDggMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyA4IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKNyAwIG9iago8PAovQXV0aG9yIChcKGFub255bW91c1wpKSAvQ3JlYXRpb25EYXRlIChEOjIwMjYwMjI0MTYwNzUxKzAwJzAwJykgL0NyZWF0b3IgKFwodW5zcGVjaWZpZWRcKSkgL0tleXdvcmRzICgpIC9Nb2REYXRlIChEOjIwMjYwMjI0MTYwNzUxKzAwJzAwJykgL1Byb2R1Y2VyIChSZXBvcnRMYWIgUERGIExpYnJhcnkgLSBcKG9wZW5zb3VyY2VcKSkgCiAgL1N1YmplY3QgKFwodW5zcGVjaWZpZWRcKSkgL1RpdGxlIChcKGFub255bW91c1wpKSAvVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyA1IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKOSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAzMjQ3Cj4+CnN0cmVhbQpHYiEjXj8kRyFuJnEvKjBXMF8lYyU4bGFMMGkqXV46PXE5WjJMJS1sYSJORWNUWjw0YVckUWVYWlRpbz5dOSpYMmA6QChxXT5sOyghTkdyc0ZrKlR1LHFMYj9hJjtxLSQsR2Q+NStQbmNmZT9dXmpWZmFGMDQ2Sl5vQmhPRl4hY1FeNVAuVmNLJFo7OWY1XjpEcjdFXGRaUSJMKVI5Z2BhcGNDPSdYcHMoVCU1KT9wXS9WSz1FIUk+YFkyJGslam5eQGJSbURPS0ZaWS8oJG5qNWZeIVluKDlSaGleP2ZmU2JwaUMtQ15vSGpAUjklcUteaTE9P21eY2VaTm9eRGhaMGEsPl0zQlVVMVFpRjhWJ09vUio6QFctSjo4WV5UJFJuI1dGM25MJVsvYzAobDtDQEpcI0VVbzUnVz4zMlRnXF1PJigtZjEhMXJdJCVFM2NnUUpFbGR0JVNbMTA8LSo2Oj5WWmAsV2NPPGtcYFw3QTckMHFwcnNaOGNHQSZUZ0p1XSQ6akEwPnViNiQiOihObk8tYVZfMDAmaC9JLVtMIzI6a1xySD9FNUhUR2Y9XV5RUy01RiQjNC9EIlRGVGpuNGpLcEU9ZixAOiQ6VU0iWj5xK1ttPzhBSSMlVU1HL3NeNS0zPEY5PG5oRDolcHJtNSFcPFJlbkdAVUpeTEJUKy1hIjROI3RBKTNkJTVeKWFeKStETUBbbFdSP0k1TW1lUEZSJjJQKUsoKUthZiNKbnIjT0xPRzlEalZraFUpXEtTRWNqQUpOM0ZNYiI3JVNIRE85LGcmP3MxXE8oNGZGLj1BUUVTKychI25OYyFJT3E/TyM9b2k5ZDohak9lalU3NjwqKXU+ViIsay5XQDhiO2piYW49SU88aEdTPzUuRDBLNXNyJVZRRE5dZ2YzSkhSTksjJzc0YDNGOTFUOFdLdGZANmVhK2YvWENxX209XiMtJkZCMCJDUEQxJSlvIzVkMic4VCM1YSJLLGFFJ0xKbj5ORVVBMT44JyZWI0xbLUQ9ZyNdPkArVGdVP1AvQi0uJCdzN2NnJEklWnRlXzU+OzM8bSgxPSEpLUtCKEJbYl8mRylSXDkmal1aJ2FWbDVlQTZeYSgzMztHLlBTTSNwVlo1bVk3NDNAN01BaF1HMzJqZHJgJjg5Z3QybCQ7RiFWIm84QFFpW0k5WTs9RzlZVmtfYDhLPiRKbzV0OkxNRD9lSiYpTj4hTl8uQSpVQkwnREptaSdKZWsoW1UkZWkyLiJnKG1cX2JbJmxpJ2RzYCM/ZitiZjNeYkd0LjpaTk9MMEVSVmNUKnRxWlwiakEyLChlSXBvUFN1RS1GKSJPLWgpZ0doQTVHTVtnMFYhVChMU2w5PHQvTjM2ZksvWWZDPmVnWG1lI0RVcSolZi5eImlzUFdbNyokYFZSbnVSIl07TjI1VFRZOzFnRnNaK0M3VlxBbGFgbzZlMVJjbU1FT0ZWOi91YGYtbW5BVS1Oay8uXz5PNGZNbF1yVENSZWg8NzRMYDxXMWlJKDNlXSF0ZFdKPzRWZDJRT1NEO1IuTzY3P0dyQXNCa1hBVDBFQlJycVRxPD8iTlhaRD1hY1xvS1hPbHMudDlMUUteV0lmZlZeaDoqby05bygqN1FPa2M3cXNdTmVGQ2Y2cS1ZcnE/PSE4ZFU6dVdtMmFhQ2xfOi0/ZktwTF00LC1jSS4/WExSOUVqJjBkZGI0SV8zXUY6ZEY2aV1db2tnW1oqSzFvP1tlWFRfXE0mSzI1RFkkdVFzP1BMbCh0dD02b0pHQltZS0JMXldbUGkyc2ZsJyMtXShnY1cqXF1AP2tHST1mPlcmRV8yaE5UNi5mMkZnSkFTQ19fbkFOXXF0QUFnNUE3MkEmUiovODdfQWIsTTIsPUhVIlNDP21gLi1wYitvcU0oMlo2SW5LJlMoaytwVlhXVFBKVjxRcFldVz1aT0FJJScjPT4hUyNFOSdaWlpAPGsxSlk2ZDVYU3BcWmdrJT5QMUNtKGBOa04tZjAhIU4kT01VKkNdZ2o5PGJwcVZhc1tpbyhERzxLQkhSLjUqV2VyKlZLSDtcRiVzRGxGOEonZylmZGRFO09JbDJVcmtwVFFOJUZvXHM9SGBeNGNXJkYtMCs2ajxSci1Hcz4jaUE0Xj5ZZ21OdXA/Pj1XMjlUY25sW3JxU2YsZzAsL1M0X18jcGtaaDRFW2xeSjgwXypjZmo4VFtCL0gwOztMMXVfYkolSzw1aT5lYktiWERHNCUwYVw4Z0BoTzFwSm1FPklYNzkrRiY4QUw4TylgJD9XUEc4Z0wyRihxKytTK1hMZy8xOFxUYlU2WGNEM1orbU9OXkZnMlNoMzgmaTBkNDVlXG5DL1cvTmNiXz5nSFVcMU8mLTE1OGNhMzdlVU0hdTFkLWBQUiVXQFdBRylNcDtqb1E9PzJkRzAjLShqPmtJX1UlL2ssOjN1WGZAYjolM05KcD4ocCYtWEpiSnM8UjpAXVVMMT5YUGk/X01sPmYjV2VgcG5DO1hXaSRiZS9zQjMwPGZGJGIjU2pcZWpZX2BXLDVSaVRrTCw/Z0FjZUA+ViZwYGIyWUsvKDZrTDotMWhnRlVYLUFOV0VlLSk3VUFUaDU3WEJlJkRgI1IuZ2VxTFkmVy5RRTg3UClOL1AmaT4hY2xYMmFUbWwpPGhTLkhXMSdTPzNeaEhuM1U4WTFaUisxakVkODtMWkBVPVxFNCZmUCNZdHAkWUxZdU1HKFsiVHA3U0wzZycvbzFnRWBgRCJpN1E1THNsY0BfJ3F0RTItN283SWIjVi8hO1NwbT5hN21gRVxwamdlIVhnTmtFRDFrW0JDLmVrUT9oPz4vaT9mPlRqVWk2U2JSLlprYU5OVzE1TEo0YTMpJUNSSjlTQ0xhaVBsNjg8aUExQGJtayI4Ql9qajhnRCo0TD5uRS5NViRQXzEwUXMwXSNPK0pGJy0tUy9LPThXI0s/bF4zdG87VSFsPj4tMGZOMyc9I21AOFIoKS1sJ2xkXj9PdXRAZFlgXFNmdVxFamQpRlpOKksxP1Q5OD5ETy49aFZSL2UhTWVSZHNVIi9rL3U0YkJlL15cVzJEYiYhRGldb2ZWV28lbDowbi5rNF0rNTcnOFNsP15KZDhRXkQrZlkyYkJQUENfTEBNaEdLS3MlY0BVImhXYUhxSE5vXV1EaSRrb0BzMU09UGE2SihVQTA0UXBzcUEkJFUxZGRAPFp1KTZSSjBKVT5UaT1iTjBxS21fPCFJclNWcFliQVBIOCMuM00oYlczKlElck1rNmskRzNKbGBvUjFFPjFIPCM2cFNQai9iR1NkQi1dUk9FJVhQP2VlQ1QxOWg3UUhuN2tKOSE2amNoXmhuVkEjWUFKY2ZjPWlRcFdtMSZwIlhnMztjW1taQjRqXGIoMFpiVjYvNlJYVSdtIyxnVFpbJDRvYkUzWzU6L281XCpMRlFtaklmXmYla1tZNV0rc1dSbT5sJWJpJnIiXG5zKklvSjNxRSVhVG5rQkdzIVdZb1ZIIz9TY0d1RExNSWFkZjIsZDkuV11JVkdCPmkoaFw1STlXbVdqMDw9TS06QEA9SE9KLnVbUlJCMi9HVm5vSik3NURDWzoicW1kaTA/WU5gQFJWOD1TU0VcbUZedEFAOVZvM2JRbFZQTnJTYnMvXGZyJCtXaXBGXS9OS1UhbCc8LjVvYXJjRVUwbiczVTxyR09aRG8kZS1kKUU6IyIpYlIzK2AkaUldPkdZKDRzI1E2PEJSI2dJVT9cXUY2JTh0WEZwVilYOEg6aEBDT2EkK1VqJilgZzRIS0JfWmFASi9iOjJWWnB1U0chSyErJjgtTHU4ZD9jLWU7KiJBTHFLTjo2NGgqLCdhRHQ5MD5rVzByPzc8ZTJeLSpeRitmbXNhIThzaDhQMzg6NVNfPXJFTFlmXGxZblA/UUIiITpOaV49NVhkM0tPZ0tnRSslQ2JeODokQFJtY1ZEdTNtZkJfJloxSVYjTW8jOWRJUk5yOWVPJV0jRDxbIzUuRW0hJUFwMXJbMmZeJyFPSCtdbjZcKzQpIVUzYlhxIVElb1N0I1hlOXFlYjglQGQ5cSZXXD0lXl5OWjUyN0M+I2ZxVTMvQCRiZTxbUi5WJ0JQSCVBc2hbXltpTmpfRlFNNVZeOm0lISducDxfclRmTEFlcmI7S1EjNzdQcE1qcSROXTBbTFpUYzszY1xHTm00RU9hMUo3NCNrJmBwRmVnY0E7SXVXWihwMTI1SFh1Y1pCP2tRJzRPLy1RU2Y+NytPKDgmNUozNEFZUDhWZHVFYyI6XCglZDduNGhVUyRQQmlFcH4+ZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTAKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMTIgMDAwMDAgbiAKMDAwMDAwMDIxOSAwMDAwMCBuIAowMDAwMDAwMzMxIDAwMDAwIG4gCjAwMDAwMDA0NDYgMDAwMDAgbiAKMDAwMDAwMDY0OSAwMDAwMCBuIAowMDAwMDAwNzE3IDAwMDAwIG4gCjAwMDAwMDA5OTcgMDAwMDAgbiAKMDAwMDAwMTA1NiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzxjMTBkZDQ0MTk5OTU4ZWZhNDQ5MGUzNmI1ZTUzNWRlMz48YzEwZGQ0NDE5OTk1OGVmYTQ0OTBlMzZiNWU1MzVkZTM+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDcgMCBSCi9Sb290IDYgMCBSCi9TaXplIDEwCj4+CnN0YXJ0eHJlZgo0Mzk0CiUlRU9GCg==" download="Precious_Williams_Resume_2025.pdf" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+        Download CV
+      </a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2025 Precious Williams — Data Analyst · Lagos, Nigeria
+  </div>
+</div>
+
+<script>
+  function activateReveals() {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    });
+  } else {
+    document.addEventListener('DOMContentLoaded', activateReveals);
+  }
+
+  // Safety net — reveal everything after 800ms no matter what
+  window.addEventListener('load', () => setTimeout(activateReveals, 800));
+</script>
+</body>
+</html>
